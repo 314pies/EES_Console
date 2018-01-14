@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset = "utf-8">
+      <title>Test Server</title> 
+		<style type = "text/css">
+			body {
+				font-family: Microsoft JhengHei;
+		</style>
+		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+		<script type="text/javascript">
+			var token, email, password, name, birthday, isMale;
+			
+			function SaveLoginParameters(response){
+				console.log(JSON.stringify(response));
+				//token = response.data.token;
+				email = response.data.email;
+				password = response.data.password;
+				name = response.data.name;
+				birthday = response.data.birthday;
+				isMale = response.data.isMale;
+				//$("#token").val(response.data.token);
+				$("#update_email").val(response.data.email);
+				$("#update_password").val(response.data.password);
+				$("#update_name").val(response.data.name);
+				$("#update_birthday").val(response.data.birthday);
+				if(isMale)
+					$("#update_isMale").prop("checked", true);
+				else
+					$("#update_isMale").prop("checked", false);
+				
+			}
+			 
+			$(document).ready(function(){
+				$("#login").click(function(){
+					console.log("enter login function");
+					var data = {};
+					data.email = $("#email").val();
+					data.password = $("#password").val();
+					console.log(data);
+					$.ajax({
+						type: 'POST',
+						//url: 'EES_login.php',
+						url: 'https://yochien.tk/EES/EES_login.php',
+						data:JSON.stringify(data),
+                        dataType: "json",
+						
+                        success: function(result){
+                        	console.log("登入回傳結果：" + result)
+							document.getElementById("response").innerHTML = JSON.stringify(result);
+							SaveLoginParameters(result);
+                        },
+						failure: function(errMsg) {
+							alert(errMsg);
+						}
+						
+                    });
+				});
+				$("#signup").click(function(){
+					console.log("enter signup function");
+					var data = {};
+					data.email = $("#sign_email").val();
+					data.password = $("#sign_password").val();
+					data.displayName = $("#name").val();
+					data.birthday = $("#birthday").val();
+					if($("#isMale").is(":checked"))
+						data.isMale = true;
+					else
+						data.isMale = false;
+					console.log(data);
+					$.ajax({
+						type: 'POST',
+						url: 'EES_signup.php',
+						data: JSON.stringify(data),
+                        dataType: "json",
+                        success: function(result){
+                        	console.log("註冊回傳結果：" + result)
+							document.getElementById("response").innerHTML = JSON.stringify(result);
+                        },
+						failure: function(errMsg) {
+							alert(errMsg);
+						}
+                    });
+				});
+				$("#update").click(function(){
+					console.log("enter update function");
+					var data = {};
+					data.email = $("#update_email").val();
+					data.password = $("#update_password").val();
+					data.name = $("#update_name").val();
+					data.birthday = $("#update_birthday").val();
+					if($("#update_isMale").is(":checked"))
+						data.isMale = true;
+					else
+						data.isMale = false;
+					console.log(data);
+					$.ajax({
+						type: 'POST',
+						url: '/update',
+						data: data,
+                        dataType: "json",
+                        success: function(result){
+                        	console.log("修改資料回傳結果：" + result)
+							document.getElementById("response").innerHTML = JSON.stringify(result);
+                        },
+						failure: function(errMsg) {
+							alert(errMsg);
+						}
+                    });
+				});
+				
+				$("#findall").click(function(){
+					console.log("enter findall function");
+					var data = {};
+					data.token = token;
+					console.log(data);
+					$.ajax({
+						type: 'POST',
+						url: '/FindAll',
+						data: data,
+                        dataType: "json",
+                        success: function(result){
+                        	console.log("載入檢測資訊結果：" + result)
+							document.getElementById("response").innerHTML = JSON.stringify(result);
+                        },
+						failure: function(errMsg) {
+							alert(errMsg);
+						}
+                    });
+				});
+				
+				$("#findnew").click(function(){
+					console.log("enter findnew function");
+					var data = {};
+					data.token = token;
+					console.log(data);
+					$.ajax({
+						type: 'POST',
+						url: '/FindNew',
+						data: data,
+                        dataType: "json",
+                        success: function(result){
+                        	console.log("載入最新檢測結果：" + result)
+							document.getElementById("response").innerHTML = JSON.stringify(result);
+                        },
+						failure: function(errMsg) {
+							alert(errMsg);
+						}
+                    });
+				});
+			});
+			
+		</script>
+	</head>
+	<body>
+		<div>login
+			<form action="#" method="POST">
+				email: <input id = "email" type = "text" value = "123">
+				password: <input id = "password" type = "text" value = "123456">
+				<input id = "login" type = "button" value = "login">
+				token: <input id = "token" type = "text" disabled style = "width: 300px">
+				<hr>
+			</form>
+	    </div>
+	    
+		
+		<div>signup
+			<form action="#" method="POST">
+				email: <input id = "sign_email" type = "text" value = "123">
+				password: <input id = "sign_password" type = "text" value = "123456">
+				name: <input id = "name" type = "text" value = "Test君">
+				birthday: <input id = "birthday" type = "text" value = "07/06/2017">
+				isMale: <input id = "isMale" type = "checkbox">
+				<input id = "signup" type = "button" value = "signup">
+				<hr>
+			</form>
+	    </div>
+		
+		<div>update
+			<form action="#" method="POST">
+				email: <input id = "update_email" type = "text">
+				password: <input id = "update_password" type = "text">
+				name: <input id = "update_name" type = "text">
+				birthday: <input id = "update_birthday" type = "text">
+				isMale: <input id = "update_isMale" type = "checkbox">
+				<input id = "update" type = "button" value = "update">
+				<hr>
+			</form>
+	    </div>
+		
+		<div>findall / findnew
+			<form action="#" method="POST">
+				<input id = "findall" type = "button" value = "FindAll">
+				<input id = "findnew" type = "button" value = "FindNew">
+				<hr>
+			</form>
+	    </div>
+	    <div id = "response"></div>
+	</body>
+</html>
+
+<!--
+**************************************************************************
+* (C) Copyright 1992-2012 by Deitel & Associates, Inc. and               *
+* Pearson Education, Inc. All Rights Reserved.                           *
+*                                                                        *
+* DISCLAIMER: The authors and publisher of this book have used their     *
+* best efforts in preparing the book. These efforts include the          *
+* development, research, and testing of the theories and programs        *
+* to determine their effectiveness. The authors and publisher make       *
+* no warranty of any kind, expressed or implied, with regard to these    *
+* programs or to the documentation contained in these books. The authors *
+* and publisher shall not be liable in any event for incidental or       *
+* consequential damages in connection with, or arising out of, the       *
+* furnishing, performance, or use of these programs.                     *
+**************************************************************************
+-->

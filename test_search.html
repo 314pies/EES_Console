@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<title>Test search</title>
+		
+		<style type = "text/css">
+			body {
+				font-family: Microsoft JhengHei;
+		</style>
+		
+		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#searchInTheProduct").click(function(){
+					console.log("enter searchInTheProduct function");
+					var data = {};
+					data.productTagName = $("#productTagName").val();
+					console.log(data);
+					
+					$.ajax({
+						type: 'POST',
+						url: 'https://yochien.tk/EES/EES_searchInTheProduct.php',
+						data:JSON.stringify(data),
+                        dataType: "json",
+						
+                        success: function(result){
+                        	console.log("回傳結果：" + result);
+							document.getElementById("response").innerHTML = JSON.stringify(result);
+                        },
+						error: function(errMsg) {
+							alert(errMsg);
+						}
+                    });
+				});
+				
+				$("#searchInTheBooth").click(function(){
+					console.log("enter searchInTheBooth function");
+					var data = {};
+					data.boothTagName = $("#boothTagName").val();
+					console.log(data);
+					
+					$.ajax({
+						type: 'POST',
+						url: 'https://yochien.tk/EES/EES_searchInTheBooth.php',
+						data:JSON.stringify(data),
+                        dataType: "json",
+						
+                        success: function(result){
+                        	console.log("回傳結果：" + result);
+							document.getElementById("response").innerHTML = JSON.stringify(result);
+                        },
+						error: function(errMsg) {
+							alert(errMsg);
+						}
+                    });
+				});
+				
+				$("#searchInTheExhibition").click(function(){
+					console.log("enter searchInTheExhibition function");
+					var data = {};
+					data.keyword = $("#keyword").val();
+					console.log(data);
+					
+					$.ajax({
+						type: 'POST',
+						url: 'https://yochien.tk/EES/EES_searchInTheExhibition.php',
+						data:JSON.stringify(data),
+                        dataType: "json",
+						
+                        success: function(result){
+                        	console.log("回傳結果：" + result)
+							document.getElementById("response").innerHTML = JSON.stringify(result);
+                        },
+						error: function(errMsg) {
+							alert(errMsg);
+						}
+                    });
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div>searchInTheProduct
+			<form action = "#" method = "POST">
+				productTagName: <input id = "productTagName" type = "text" value = "測試">
+				<input id = "searchInTheProduct" type = "button" value = "searchInTheProduct">
+				<hr>
+			</form>
+	    </div>
+		
+		<div>searchInTheBooth
+			<form action = "#" method = "POST">
+				boothTagName: <input id = "boothTagName" type = "text" value = "測試">
+				<input id = "searchInTheBooth" type = "button" value = "searchInTheBooth">
+				<hr>
+			</form>
+	    </div>
+		
+		<div>searchInTheExhibition
+			<form action = "#" method = "POST">
+				search: <input id = "keyword" type = "text" value = "測">
+				<input id = "searchInTheExhibition" type = "button" value = "searchInTheExhibition">
+				<hr>
+			</form>
+	    </div>
+	    <div id = "response"></div>
+	</body>
+</html>
+
+<!--
+**************************************************************************
+* (C) Copyright 1992-2012 by Deitel & Associates, Inc. and               *
+* Pearson Education, Inc. All Rights Reserved.                           *
+*                                                                        *
+* DISCLAIMER: The authors and publisher of this book have used their     *
+* best efforts in preparing the book. These efforts include the          *
+* development, research, and testing of the theories and programs        *
+* to determine their effectiveness. The authors and publisher make       *
+* no warranty of any kind, expressed or implied, with regard to these    *
+* programs or to the documentation contained in these books. The authors *
+* and publisher shall not be liable in any event for incidental or       *
+* consequential damages in connection with, or arising out of, the       *
+* furnishing, performance, or use of these programs.                     *
+**************************************************************************
+-->

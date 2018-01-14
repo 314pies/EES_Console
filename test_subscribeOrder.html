@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<title>Test subscribeOrder</title>
+		
+		<style type = "text/css">
+			body {
+				font-family: Microsoft JhengHei;
+		</style>
+		
+		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#sendOrder").click(function(){
+					console.log("enter sendOrder function");
+					var data = {};
+					data.userId = $("#userId").val();
+					data.productId = $("#productId").val();
+					data.amount = $("#amount").val();
+					console.log(data);
+					
+					$.ajax({
+						type: 'POST',
+						url: 'https://yochien.tk/EES/EES_sendOrder.php',
+						data:JSON.stringify(data),
+                        dataType: "json",
+						
+                        success: function(result){
+                        	console.log("回傳結果：" + result);
+							document.getElementById("response").innerHTML = JSON.stringify(result);
+                        },
+						error: function(errMsg) {
+							alert(errMsg);
+						}
+                    });
+				});
+				
+				$("#subscribe").click(function(){
+					console.log("enter subscribe function");
+					var data = {};
+					data.subscribeAccountId = $("#subscribeAccountId").val();
+					data.subscribedAccountId = $("#subscribedAccountId").val();
+					console.log(data);
+					
+					$.ajax({
+						type: 'POST',
+						url: 'https://yochien.tk/EES/EES_subscribe.php',
+						data:JSON.stringify(data),
+                        dataType: "json",
+						
+                        success: function(result){
+                        	console.log("回傳結果：" + result);
+							document.getElementById("response").innerHTML = JSON.stringify(result);
+                        },
+						error: function(errMsg) {
+							alert(errMsg);
+						}
+                    });
+				});
+				
+				$("#unsubscribe").click(function(){
+					console.log("enter unsubscribe function");
+					var data = {};
+					data.subscribeAccountId = $("#unsubscribeAccountId").val();
+					data.subscribedAccountId = $("#unsubscribedAccountId").val();
+					console.log(data);
+					
+					$.ajax({
+						type: 'POST',
+						url: 'https://yochien.tk/EES/EES_unsubscribe.php',
+						data:JSON.stringify(data),
+                        dataType: "json",
+						
+                        success: function(result){
+                        	console.log("回傳結果：" + result)
+							document.getElementById("response").innerHTML = JSON.stringify(result);
+                        },
+						error: function(errMsg) {
+							alert(errMsg);
+						}
+                    });
+				});
+				
+				$("#getSubscribe").click(function(){
+					console.log("enter getSubscribe function");
+					var data = {};
+					data.accountId = $("#accountId").val();
+					console.log(data);
+					
+					$.ajax({
+						type: 'POST',
+						url: 'https://yochien.tk/EES/EES_getSubscribe.php',
+						data:JSON.stringify(data),
+                        dataType: "json",
+						
+                        success: function(result){
+                        	console.log("回傳結果：" + result);
+							document.getElementById("response").innerHTML = JSON.stringify(result);
+                        },
+						error: function(errMsg) {
+							alert(errMsg);
+						}
+                    });
+				});
+				
+			});
+		</script>
+	</head>
+	<body>
+		<div>sendOrder
+			<form action = "#" method = "POST">
+				userId: <input id = "userId" type = "text" value = "1">
+				productId: <input id = "productId" type = "text" value = "1">
+				amount: <input id = "amount" type = "text" value = "2">
+				<input id = "sendOrder" type = "button" value = "sendOrder">
+				<hr>
+			</form>
+	    </div>
+		
+		<div>subscribe
+			<form action = "#" method = "POST">
+				subscribeAccountId: <input id = "subscribeAccountId" type = "text" value = "1">
+				subscribedAccountId: <input id = "subscribedAccountId" type = "text" value = "2">
+				<input id = "subscribe" type = "button" value = "subscribe">
+				<hr>
+			</form>
+	    </div>
+		
+		<div>unsubscribe
+			<form action = "#" method = "POST">
+				subscribeAccountId: <input id = "unsubscribeAccountId" type = "text" value = "1">
+				subscribedAccountId: <input id = "unsubscribedAccountId" type = "text" value = "2">
+				<input id = "unsubscribe" type = "button" value = "unsubscribe">
+				<hr>
+			</form>
+	    </div>
+		
+		
+		<div>getSubscribe
+			<form action = "#" method = "POST">
+				accountId: <input id = "accountId" type = "text" value = "1">
+				<input id = "getSubscribe" type = "button" value = "getSubscribe">
+				<hr>
+			</form>
+	    </div>
+		
+	    <div id = "response"></div>
+	</body>
+</html>
+
+<!--
+**************************************************************************
+* (C) Copyright 1992-2012 by Deitel & Associates, Inc. and               *
+* Pearson Education, Inc. All Rights Reserved.                           *
+*                                                                        *
+* DISCLAIMER: The authors and publisher of this book have used their     *
+* best efforts in preparing the book. These efforts include the          *
+* development, research, and testing of the theories and programs        *
+* to determine their effectiveness. The authors and publisher make       *
+* no warranty of any kind, expressed or implied, with regard to these    *
+* programs or to the documentation contained in these books. The authors *
+* and publisher shall not be liable in any event for incidental or       *
+* consequential damages in connection with, or arising out of, the       *
+* furnishing, performance, or use of these programs.                     *
+**************************************************************************
+-->

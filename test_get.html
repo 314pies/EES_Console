@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<title>Test get</title>
+		
+		<style type = "text/css">
+			body {
+				font-family: Microsoft JhengHei;
+		</style>
+		
+		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+		
+		<script type="text/javascript">	 
+			$(document).ready(function(){
+				$("#getExhibtion").click(function(){
+					console.log("enter getExhibtion function");
+					var data = {};
+					
+					$.ajax({
+						type: 'POST',
+						url: 'https://yochien.tk/EES/EES_getExhibtion.php',
+						data:JSON.stringify(data),
+                        dataType: "json",
+						
+                        success: function(result){
+                        	console.log("回傳結果：" + result)
+							document.getElementById("response").innerHTML = JSON.stringify(result);
+                        },
+						error: function(errMsg) {
+							alert(errMsg);
+						}
+                    });
+				});
+				
+				$("#getBooth").click(function(){
+					console.log("enter getBooth function");
+					var data = {};
+					data.exhibitionId = $("#exhibitionId").val();
+					console.log(data);
+					
+					$.ajax({
+						type: 'POST',
+						url: 'https://yochien.tk/EES/EES_getBooth.php',
+						data:JSON.stringify(data),
+                        dataType: "json",
+						
+                        success: function(result){
+                        	console.log("回傳結果：" + result);
+							document.getElementById("response").innerHTML = JSON.stringify(result);
+                        },
+						error: function(errMsg) {
+							alert(errMsg);
+						}
+                    });
+				});
+				
+				$("#getHoldersBooth").click(function(){
+					console.log("enter getHoldersBooth function");
+					var data = {};
+					data.holderId = $("#holderId").val();
+					console.log(data);
+					
+					$.ajax({
+						type: 'POST',
+						url: 'https://yochien.tk/EES/EES_getHoldersBooth.php',
+						data:JSON.stringify(data),
+                        dataType: "json",
+						
+                        success: function(result){
+                        	console.log("回傳結果：" + result);
+							document.getElementById("response").innerHTML = JSON.stringify(result);
+                        },
+						error: function(errMsg) {
+							alert(errMsg);
+						}
+                    });
+				});
+				
+				$("#getProduct").click(function(){
+					console.log("enter getProduct function");
+					var data = {};
+					data.boothId = $("#boothId").val();
+					console.log(data);
+					
+					$.ajax({
+						type: 'POST',
+						url: 'https://yochien.tk/EES/EES_getProduct.php',
+						data:JSON.stringify(data),
+                        dataType: "json",
+						
+                        success: function(result){
+                        	console.log("回傳結果：" + result);
+							document.getElementById("response").innerHTML = JSON.stringify(result);
+                        },
+						error: function(errMsg) {
+							alert(errMsg);
+						}
+                    });
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div>getExhibtion
+			<form action = "#" method = "POST">
+				<input id = "getExhibtion" type = "button" value = "getExhibtion">
+				<hr>
+			</form>
+	    </div>
+		
+		<div>getBooth
+			<form action = "#" method = "POST">
+				exhibitionId: <input id = "exhibitionId" type = "text" value = "1">
+				<input id = "getBooth" type = "button" value = "getBooth">
+				<hr>
+			</form>
+	    </div>
+		
+		<div>getHoldersBooth
+			<form action = "#" method = "POST">
+				holderId: <input id = "holderId" type = "text" value = "1">
+				<input id = "getHoldersBooth" type = "button" value = "getHoldersBooth">
+				<hr>
+			</form>
+	    </div>
+		
+		<div>getProduct
+			<form action = "#" method = "POST">
+				boothId: <input id = "boothId" type = "text" value = "1">
+				<input id = "getProduct" type = "button" value = "getProduct">
+				<hr>
+			</form>
+	    </div>
+		
+	    <div id = "response"></div>
+	</body>
+</html>
+
+<!--
+**************************************************************************
+* (C) Copyright 1992-2012 by Deitel & Associates, Inc. and               *
+* Pearson Education, Inc. All Rights Reserved.                           *
+*                                                                        *
+* DISCLAIMER: The authors and publisher of this book have used their     *
+* best efforts in preparing the book. These efforts include the          *
+* development, research, and testing of the theories and programs        *
+* to determine their effectiveness. The authors and publisher make       *
+* no warranty of any kind, expressed or implied, with regard to these    *
+* programs or to the documentation contained in these books. The authors *
+* and publisher shall not be liable in any event for incidental or       *
+* consequential damages in connection with, or arising out of, the       *
+* furnishing, performance, or use of these programs.                     *
+**************************************************************************
+-->
