@@ -8,6 +8,6 @@ For the mobile client, please visit [this repository](https://github.com/314pies
 ## Installation
 1. Install PHP 5 and MySQL
 2. Download all files from this repository and place in the PHP 5 web hosting folder.
-3. Setup database username and password in [mysql_connect.inc.php](https://github.com/314pies/EES_Console/blob/yochien/mysql_connect.inc.php)
+3. Setup database address, username and password in [mysql_connect.inc.php](https://github.com/314pies/EES_Console/blob/yochien/mysql_connect.inc.php)
 4. Setup required [tables](https://github.com/314pies/EES_Console/wiki/Tables) in database.
 5. Launch the web and database server.
