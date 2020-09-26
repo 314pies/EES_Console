@@ -1,4 +1,4 @@
-# Electric Exhibition System
+# Electronic Exhibition System
 
 This is the repository of the Electric Exhibition System (EES) backend.  
 A system that is designed to browse physical/virtual exhibitions online, and provide visitors digital guide book while visiting physical exhibitions.
