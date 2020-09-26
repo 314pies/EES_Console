@@ -1,6 +1,6 @@
 # Electronic Exhibition System
 
-This is the repository of the Electric Exhibition System (EES) backend.  
+This is the repository of the Electronic Exhibition System (EES) backend.  
 A system that is designed to browse physical/virtual exhibitions online, and provide visitors digital guide book while visiting physical exhibitions.
 For the mobile client, please visit [this repository](https://github.com/314pies/EES-Client-Mobile). 
 
